@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useCustomerOrdersQuery } from '../../redux/api/baseApi'
 
-import toast, { ToastBar, Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import toast, {  Toaster } from 'react-hot-toast';
+
 
 const UserOrderHistoryPage = () => {
   const {isLoading,error,data} = useCustomerOrdersQuery('')
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   console.log(data);
   
 useEffect(()=>{

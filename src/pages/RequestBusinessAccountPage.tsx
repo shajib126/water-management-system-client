@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useRequestAdminAccountMutation } from '../redux/api/baseApi'
 import toast, { Toaster } from 'react-hot-toast'

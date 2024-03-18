@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useCustomersQuery } from "../../redux/api/baseApi";
 import Loading from "../Loading";
 

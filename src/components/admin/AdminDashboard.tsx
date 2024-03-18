@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
+
 import AdminDashboardPage from "../../pages/admin/AdminDashboardPage";
 import Navbar from "../../pages/Navbar";
 
-const AdminDashboard = ({children}:{children:ReactNode}) => {
+const AdminDashboard = ({children}:{children:any}) => {
   return (
     <div>
         <Navbar/>

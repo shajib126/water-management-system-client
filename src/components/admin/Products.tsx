@@ -1,4 +1,4 @@
-import React from 'react'
+
 import ProductsPage from '../../pages/admin/ProductsPage'
 import AdminDashboard from './AdminDashboard'
 

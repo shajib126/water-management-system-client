@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Navbar from '../pages/Navbar'
 import UserSignUpPage from '../pages/UserSignUpPage'
 

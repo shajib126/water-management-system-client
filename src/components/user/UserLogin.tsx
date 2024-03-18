@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Navbar from '../../pages/Navbar'
 import UserLoginPage from '../../pages/user/UserLoginPage'
 
