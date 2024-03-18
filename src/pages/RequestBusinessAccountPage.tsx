@@ -31,11 +31,10 @@ const [requestAdminAccount] = useRequestAdminAccountMutation()
         password
       }
       const res = await requestAdminAccount(adminInfo)
-      if(res.error){
-        toast.error(res.error.data.message)
-      }else{
+      console.log(res);
+      
         toast.success('Admin account request successfully!')
-      }
+      
       
       
       console.log(adminInfo);

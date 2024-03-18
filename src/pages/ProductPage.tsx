@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+
 import { useCategoriesQuery } from '../redux/api/baseApi'
 import toast, { Toaster } from 'react-hot-toast'
 import { useAppSelector } from '../redux/hooks'
+import { useEffect } from 'react'
 
 const images = [
     'https://thumbs.dreamstime.com/b/big-bottle-water-2124871.jpg',
@@ -15,7 +16,7 @@ const ProductPage = () => {
     const {error,isLoading,data} = useCategoriesQuery('')
     useEffect(()=>{
        if(error){
-        toast.error(error.data?.message)
+        toast.error('error occured')
        } 
     },[error,data])
     const handleClickProduc = (productId:string)=>{
