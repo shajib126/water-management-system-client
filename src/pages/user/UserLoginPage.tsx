@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUserLoginMutation, useUserProfileQuery } from '../../redux/api/baseApi'
 import toast, { Toaster } from 'react-hot-toast'
 import { verifyToken } from '../../utils/verifyToken'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useAppDispatch } from '../../redux/hooks'
 import { setProfile, setUser } from '../../redux/features/auth/authSlice'
 
 
@@ -12,8 +12,7 @@ const UserLoginPage = () => {
   const [password,setPassword] = useState('')
   const [userLogin] = useUserLoginMutation()
   const dispatch = useAppDispatch()
-  const profile = useAppSelector((state)=>state.auth.userProfile)
-  const {isLoading,error,data} = useUserProfileQuery('')
+  const {error,data} = useUserProfileQuery('')
   
   
   const navigate = useNavigate()

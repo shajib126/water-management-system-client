@@ -3,7 +3,6 @@ import App from "../App";
 import StartBusiness from "../pages/StartBusiness";
 import RequestBusinessAccount from "../components/RequestBusinessAccount";
 import UserSignUp from "../components/UserSignUp";
-import AdminDashboard from "../components/admin/AdminDashboard";
 import Dashboard from "../components/admin/Dashboard";
 import CreateProduct from "../components/admin/CreateProduct";
 import UserLogin from "../components/user/UserLogin";

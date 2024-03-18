@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+
+import { useEffect } from 'react';
 import { useCustomerOrdersQuery } from '../../redux/api/baseApi'
 
 import toast, {  Toaster } from 'react-hot-toast';
@@ -35,7 +36,7 @@ useEffect(()=>{
       </tr>
     </thead>
     <tbody>
-    {data?.data?.map((order,i:number)=>(
+    {data?.data?.map((order:any,i:number)=>(
             <tr className='text-2xl text-gray-500' key={i}>
               <th>{i+1}</th>
               <td>{order?.product.productName}</td>

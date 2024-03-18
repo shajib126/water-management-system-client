@@ -21,7 +21,7 @@ export type TUser = {
 export type TAuth = {
     user:null | TUser
     token:null | string
-    userProfile:null | TProfile
+    userProfile:null | any
 }
 
 const initialState:TAuth = {

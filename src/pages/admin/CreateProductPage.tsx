@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { useCategoriesQuery, useCreateProductMutation } from "../../redux/api/baseApi";
 
 type TCategory = {
@@ -9,12 +10,12 @@ type TCategory = {
 
 }
 const CreateProductPage = () => {
-  const { isLoading, data, error } = useCategoriesQuery("");
+  const { data } = useCategoriesQuery("");
   const [productCategory,setProductCategory] = useState('')
   const [productName,setProductName] = useState('')
-  const [productSize,setProductSize] = useState('')
-  const [sizeType,setSizeTYpe] = useState('')
-  const [initialPrice,setInitialPrice] = useState<number | undefined>(null)
+  // const [productSize,setProductSize] = useState('')
+  // const [sizeType,setSizeTYpe] = useState('')
+  const [initialPrice,setInitialPrice] = useState<number | undefined>(0)
 const [createProduct] = useCreateProductMutation()
 
 const handleCreateProduct = (e:React.FormEvent)=>{

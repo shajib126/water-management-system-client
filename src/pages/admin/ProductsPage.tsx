@@ -1,9 +1,9 @@
-import React from 'react'
+
 import { useProductsAdminQuery } from '../../redux/api/baseApi';
 
 
 const ProductsPage = () => {
-    const {error,isLoading,data} = useProductsAdminQuery('')
+    const {data} = useProductsAdminQuery('')
     console.log(data);
     
   return (
@@ -21,7 +21,7 @@ const ProductsPage = () => {
       </tr>
     </thead>
     <tbody>
-      {data?.data.map((product,i)=>(
+      {data?.data.map((product:any,i:number)=>(
         <tr>
           <th>{i+1}</th>
           <th>{product.productName}</th>

@@ -15,7 +15,7 @@ const ProductPage = () => {
     const {error,isLoading,data} = useCategoriesQuery('')
     useEffect(()=>{
        if(error){
-        toast.error(error.message)
+        toast.error(error.data?.message)
        } 
     },[error,data])
     const handleClickProduc = (productId:string)=>{
@@ -35,7 +35,7 @@ const ProductPage = () => {
         <div className='p-2'>
             {
                 isLoading ? <span className="loading loading-bars loading-lg"></span> : <div className='flex gap-4'>
-                    {data?.data?.map((category,i)=>(
+                    {data?.data?.map((category:any,i:number)=>(
                         <div key={i} >
                             <img onClick={()=>handleClickProduc(category._id)} className='w-[200px] h-[200px] border-2 rounded-md cursor-pointer' src={category?.category == 'water' ? images[0] : category?.category == 'Pipe'?images[2] : images[1]} alt="" />
                             <h1>{category.category}</h1>

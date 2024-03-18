@@ -30,8 +30,8 @@ const UsersPage = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {data?.data.map((user, i) => (
-              <tr>
+            {data?.data.map((user:any,i:number) => (
+              <tr key={i}>
                 <th>
                   <label>
                     <input type="checkbox" className="checkbox" />

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import { useAllOrdersQuery } from "../../redux/api/baseApi";
 
 const OrdersPage = () => {
-  const { isLoading, error, data } = useAllOrdersQuery('isPaid=false&placeOrder=true');
+  const { isLoading, data } = useAllOrdersQuery('isPaid=false&placeOrder=true');
   console.log(data?.data);
 useEffect(()=>{
 
@@ -28,7 +29,7 @@ useEffect(()=>{
               </tr>
             </thead>
             <tbody>
-              {data?.data.map((order, i:number) => (
+              {data?.data.map((order:any, i:number) => (
                 <tr className="bg-base-200">
                   <th>{i+1}</th>
                   <td>{order?.product?.productName}</td>

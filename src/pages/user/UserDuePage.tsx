@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useCustomerDueQuery } from "../../redux/api/baseApi";
 import toast, { Toaster } from "react-hot-toast";
 
 const UserDuePage = () => {
   const { isLoading, error, data } = useCustomerDueQuery("");
-  const total = data?.data?.reduce((acc, curr) => {
+  const total = data?.data?.reduce((acc:number, curr:any) => {
     return acc + curr.total;
   }, 0);
 
 
   useEffect(() => {
     if (error) {
-      toast.error(error.message);
+      toast.error(error?.data?.message);
     }
     if (data?.success) {
       toast.success(data?.message);
@@ -24,7 +24,7 @@ const UserDuePage = () => {
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <button
           className="btn"
-          onClick={() => document.getElementById("my_modal_1").showModal()}
+          // onClick={() => document.getElementById("my_modal_1").showModal()}
         >
           মোট বকেয়া!
         </button>
@@ -60,7 +60,7 @@ const UserDuePage = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((due, i: number) => (
+            {data?.data?.map((due:any, i: number) => (
               <tr className="text-2xl" key={i}>
                 <th>{i + 1}</th>
                 <td>{due?.product.productName}</td>
