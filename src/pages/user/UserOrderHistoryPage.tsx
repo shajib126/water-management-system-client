@@ -13,7 +13,7 @@ const UserOrderHistoryPage = () => {
 useEffect(()=>{
   
   if(error){
-    toast.error(error?.data?.message)
+    toast.error('error occured')
     
   }
   if(data?.success){
