@@ -1,8 +1,12 @@
 
 import AdminDashboardPage from "../../pages/admin/AdminDashboardPage";
 import Navbar from "../../pages/Navbar";
+import { useAppSelector } from "../../redux/hooks";
 
 const AdminDashboard = ({children}:{children:any}) => {
+  const profile = useAppSelector((state)=>state.auth.adminProfile)
+  console.log(profile);
+  
   return (
     <div>
         <Navbar/>

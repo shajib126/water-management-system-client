@@ -15,6 +15,7 @@ import UserDashboard from "../components/user/UserDashboard";
 import UserOrderHistory from "../components/user/UserOrderHistory";
 import UserDue from "../components/user/UserDue";
 import UserCredit from "../components/user/UserCredit";
+import Category from "../components/admin/Category";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
         path:'/admin/create-product',
         element:<CreateProduct/>
+    },
+    {
+        path:'/admin/category',
+        element:<Category/>
     },
     {
         path:'/admin/login',

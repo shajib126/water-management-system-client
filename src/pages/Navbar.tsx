@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { logout } from "../redux/features/auth/authSlice"
 const navigation = [
     { name: 'Product', href: '/customer/products' },
     { name: 'Features', href: '#' },
@@ -12,13 +14,15 @@ const navigation = [
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const profile = useAppSelector((state)=>state.auth.adminProfile)
   return (
     <header className="sticky absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">WMS</span>
-              <h1>WMS</h1>
+              <h1>PANI_HISHAB</h1>
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -39,9 +43,13 @@ const Navbar = () => {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">
+            {
+              profile ?<button onClick={()=>dispatch(logout())} className="btn btn-outline btn-secondary">Logout</button>
+              :<Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
+            }
+            
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>

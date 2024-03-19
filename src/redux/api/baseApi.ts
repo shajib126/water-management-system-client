@@ -25,6 +25,12 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
+        adminProfile:build.query({
+            query:()=>({
+                url:'/admin/profile',
+                method:'GET'
+            })
+        }),
         requestAdminAccount:build.mutation({
             query:(adminInfo)=>({
                 url:'/admin/create',
@@ -84,6 +90,13 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
+        createCategory:build.mutation({
+            query:(categoryInfo)=>({
+                url:'/category/create',
+                method:'POST',
+                body:categoryInfo
+            })
+        }),
         createProduct:build.mutation({
             query:(product)=>({
                 url:'/product/create',
@@ -115,4 +128,4 @@ export const baseApi = createApi({
     })
 })
 
-export const {useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

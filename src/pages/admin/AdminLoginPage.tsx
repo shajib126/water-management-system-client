@@ -1,19 +1,40 @@
 
 import { Link, useNavigate } from "react-router-dom";
-import { useAdminLoginMutation } from "../../redux/api/baseApi";
+import { useAdminLoginMutation, useAdminProfileQuery } from "../../redux/api/baseApi";
 import toast, { Toaster } from "react-hot-toast";
 import { verifyToken } from "../../utils/verifyToken";
 import { useAppDispatch } from "../../redux/hooks";
-import { setUser } from "../../redux/features/auth/authSlice";
-import { useState } from "react";
+import { setAdminProfile, setUser } from "../../redux/features/auth/authSlice";
+import { useEffect, useState } from "react";
 
 const AdminLoginPage = () => {
   const [email, setEmial] = useState("");
   const [password, setPassword] = useState("");
-
   const [adminLogin] = useAdminLoginMutation();
   const dispatch = useAppDispatch();
+  const {error,data} = useAdminProfileQuery('')
+
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    
+    if(error){
+      dispatch(setAdminProfile(null))
+    }
+    if(data){
+      dispatch(setAdminProfile(data?.data))
+    }
+    
+  },[error,data])
+
+  useEffect(()=>{
+   
+   
+    if(data){
+      navigate('/admin')
+    }
+  },[])
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const adminLoginSubmit = async (e: any) => {
     e.preventDefault();

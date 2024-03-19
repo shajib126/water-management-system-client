@@ -12,6 +12,18 @@ export type TProfile = {
     updateAt:string
 
 }
+export type TAdminProfile = {
+    _id:string;
+    firstName:string;
+    lastName:string;
+    email:string;
+    phone:string;
+    address:string;
+    stoerId:string;
+    isActive:boolean;
+    createdAt:string;
+    updateAt:string
+}
 export type TUser = {
     userId:string;
     role:string;
@@ -22,12 +34,14 @@ export type TAuth = {
     user:null | TUser
     token:null | string
     userProfile:null | any
+    adminProfile:null | TAdminProfile
 }
 
 const initialState:TAuth = {
     user:null,
     token:null,
-    userProfile:null
+    userProfile:null,
+    adminProfile:null
 }
 const authSlice = createSlice({
     name:'auth',
@@ -41,14 +55,19 @@ const authSlice = createSlice({
         setProfile:(state,action)=>{
             state.userProfile = action.payload
         },
+        setAdminProfile:(state,action)=>{
+            state.adminProfile = action.payload
+        },
         logout:(state)=>{
             state.user = null;
-            state.token = null
+            state.token = null;
+            state.userProfile = null;
+            state.adminProfile = null
         }
     }
 })
 
-export const {setUser,logout,setProfile} = authSlice.actions
+export const {setUser,logout,setProfile,setAdminProfile} = authSlice.actions
 export default authSlice.reducer
 
 export const useCurrentToken = (state:RootState) => state.auth.token
