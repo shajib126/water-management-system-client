@@ -36,8 +36,6 @@ const [requestAdminAccount] = useRequestAdminAccountMutation()
         toast.success('Admin account request successfully!')
       
       
-      
-      console.log(adminInfo);
     }
     
     

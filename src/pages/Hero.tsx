@@ -24,21 +24,14 @@ const Hero = () => {
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{' '}
-              <a href="#" className="font-semibold text-indigo-600">
-                <span className="absolute inset-0" aria-hidden="true" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
+           
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Manage Your Business or Order Products
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              প্রডাক্ট ম্যানেজ, অর্ডার ট্র্যাকিং এবং আপনার পানি ফ্যাক্টারির যাবতীয় কাজ অনলাইন ভিত্তিক এবং সহজতর করে তুলুন।
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
@@ -47,9 +40,7 @@ const Hero = () => {
               >
                 Get started
               </Link>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+            
             </div>
           </div>
         </div>

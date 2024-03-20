@@ -2,7 +2,7 @@ import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 // const baseQuery = fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1'})
 export const baseApi = createApi({
-    baseQuery:fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
+    baseQuery:fetchBaseQuery({baseUrl:'https://water-management-system.vercel.app/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
       const token = (getState() as RootState).auth.token
        
        
@@ -44,6 +44,18 @@ export const baseApi = createApi({
                 url:'/admin/login',
                 method:'POST',
                 body:adminInfo
+            })
+        }),
+        approvedAdmin:build.query({
+            query:()=>({
+                url:'/admin/approved',
+                method:'GET'
+            })
+        }),
+        allAdmin:build.query({
+            query:()=>({
+                url:'/admin',
+                method:'GET'
             })
         }),
         customerRegistration:build.mutation({
@@ -128,4 +140,4 @@ export const baseApi = createApi({
     })
 })
 
-export const {useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import { useAllOrdersQuery } from "../../redux/api/baseApi";
 
 const OrdersPage = () => {
-  const { isLoading, data } = useAllOrdersQuery('isPaid=false&placeOrder=true');
-  console.log(data?.data);
-useEffect(()=>{
+  const { isLoading, data } = useAllOrdersQuery('');
+  // const query = 'isPaid=false&placeOrder=true'
+  // const [showOrder,setShowOrder] = useState(false)
+  const [orderStatus,setOrderStatus] = useState('')
+  // const handleSaveChange = (order:any)=>{
+  //   console.log(order);
+    
+  // }
+  useEffect(()=>{
 
-},[])
-  const [showPlaceOrder,setShowPlaceOrder] = useState(false)
-
+  },[])
+  console.log(orderStatus);
+  
   return (
     <div>
       {isLoading ? (
@@ -19,7 +25,7 @@ useEffect(()=>{
           <table className="table">
             {/* head */}
             <thead>
-              <tr>
+              <tr className="">
                 <th></th>
                 <th>Product</th>
                 <th>QTY</th>
@@ -30,25 +36,39 @@ useEffect(()=>{
             </thead>
             <tbody>
               {data?.data.map((order:any, i:number) => (
-                <tr className="bg-base-200">
+                <tr className="bg-base-200 text-[16px]">
                   <th>{i+1}</th>
-                  <td>{order?.product?.productName}</td>
+                  <td>
+                    <div>
+                    {order?.product?.productName}
+                    <br />
+                    {order?.user?.name}
+                    <br />
+                    {order?.user?.address}
+                    </div>
+                    
+                  </td>
                   <td>{order?.quantity}</td>
-                  <div>
-                  <td onClick={()=>setShowPlaceOrder(!showPlaceOrder)}>{order?.placeOrder ? 'Done' :'Pending' }</td>
-                  {
-                    showPlaceOrder && <select>
+                 
+                  <td>
+                    <div>
+                    {order?.placeOrder ? 'Done' :'Pending' }
+                    
+                    <select  value={orderStatus} onChange={(e)=>setOrderStatus(e.target.value)}>
                         <option>Order status</option>
-                    <option value='true' key="">Done</option>
+                    <option  value='true' key="">Done</option>
                     <option value="false">Pending</option>
                   </select>
-                  }
                   
-                  </div>
+               
+                    </div>
+                  
+                  </td>
                   
                   <td>{order?.isPaid ? 'Paid' :'Due'}</td>
                   
                   <td>{order?.total}</td>
+                 
                 </tr>
               ))}
             </tbody>
