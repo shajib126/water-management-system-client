@@ -13,16 +13,18 @@ const CategoryPage = () => {
     }
     createCategory(categoryInfo);
     
+    
+    
+    
   }
   const imageChange = (e:any)=>{
-    if(e.target.name == 'image'){
-      const reader = new FileReader()
-      reader.onload = ()=>{
-        if(reader.readyState === 2){
-          setPhoto(reader.result as string)
-        }
+    const file = e.target.files[0]
+    const Reader = new FileReader()
+    Reader.readAsDataURL(file)
+    Reader.onload = ()=>{
+      if(Reader.readyState === 2){
+        setPhoto(Reader.result as string)
       }
-      reader.readAsDataURL(e.target.files[0])
     }
   }
   return (
