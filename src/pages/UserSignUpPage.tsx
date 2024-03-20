@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast"
 
 
 const UserSignUpPage = () => {
-  const [customerRegistration] = useCustomerRegistrationMutation('')
+  const [customerRegistration] = useCustomerRegistrationMutation()
   const {isLoading,error,data} = useApprovedAdminQuery('')
   const [adminStoreId,setAdminStoreId] = useState('')
   const [name,setName] = useState('')
