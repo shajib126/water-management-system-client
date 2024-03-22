@@ -10,9 +10,9 @@ const AdminDashboard = ({children}:{children:any}) => {
   return (
     <div>
         <Navbar/>
-    <div className="flex gap-2">
+    <div className="md:flex md:gap-2">
       <AdminDashboardPage/>
-      <div className=" w-[90%] bg-slate-100 rounded-md p-2 mx-auto border-2 border-dashed">
+      <div className=" md:w-[90%] md:bg-slate-100 md:rounded-md p-2 mx-auto border-2 border-dashed">
         {children}
       </div>
     </div>

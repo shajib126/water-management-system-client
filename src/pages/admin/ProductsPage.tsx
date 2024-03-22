@@ -1,15 +1,16 @@
 
 import { useProductsAdminQuery } from '../../redux/api/baseApi';
+import Loading from '../Loading';
 
 
 const ProductsPage = () => {
-    const {data} = useProductsAdminQuery('')
-    console.log(data);
+    const {isLoading,data} = useProductsAdminQuery('')
+    
     
   return (
     <div>
       <div className="overflow-x-auto">
-  <table className="table">
+        {isLoading ? <Loading/> : <table className="table">
     {/* head */}
     <thead>
       <tr>
@@ -24,15 +25,16 @@ const ProductsPage = () => {
       {data?.data.map((product:any,i:number)=>(
         <tr>
           <th>{i+1}</th>
-          <th>{product.productName}</th>
-          <th>{product.initialPrice}</th>
-          <th>{product.productCategory.category}</th>
-          <th>{product.productSize}{product.sizeType}</th>
+          <th>{product?.productName}</th>
+          <th>{product?.initialPrice}</th>
+          <th>{product?.productCategory?.category}</th>
+          <th>{product?.productSize}{product?.sizeType}</th>
         </tr>
       ))}
       
     </tbody>
-  </table>
+  </table>}
+  
 </div>
     </div>
   )

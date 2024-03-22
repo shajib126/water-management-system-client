@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from './features/auth/authSlice'
+import categoryReducer from './features/category/categorySlice'
 import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
@@ -13,7 +14,8 @@ const persistedAuthReducer = persistReducer(persistConfig,authReducer)
 export const store = configureStore({
     reducer:{
         [baseApi.reducerPath]:baseApi.reducer,
-        auth:persistedAuthReducer
+        auth:persistedAuthReducer,
+        category:categoryReducer
     },
     middleware:(getDefaultMiddleware)=>getDefaultMiddleware({
         serializableCheck:{

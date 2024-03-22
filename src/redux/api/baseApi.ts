@@ -1,8 +1,9 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 // const baseQuery = fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1'})
+
 export const baseApi = createApi({
-    baseQuery:fetchBaseQuery({baseUrl:'https://water-management-system.vercel.app/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
+    baseQuery:fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
       const token = (getState() as RootState).auth.token
        
        
@@ -11,6 +12,7 @@ export const baseApi = createApi({
        }
        return headers
     }}),
+    tagTypes:['Category','Order','AdditionalPrice'],
     endpoints:(build)=>({
         userLogin:build.mutation({
             query:(userInfo)=>({
@@ -58,6 +60,21 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
+        createAdditionalPrice:build.mutation({
+            query:(additional)=>({
+                url:'/additional-price/create',
+                method:'POST',
+                body:additional
+            }),
+            invalidatesTags:['AdditionalPrice']
+        }),
+        additionalPrice:build.query({
+            query:()=>({
+                url:'/additional-price',
+                method:'GET'
+            }),
+            providesTags:['AdditionalPrice']
+        }),
         customerRegistration:build.mutation({
             query:(customerInfo)=>({
                 url:'/user/create',
@@ -82,7 +99,16 @@ export const baseApi = createApi({
             query:()=>({
                 url:`/order/customer-order`,
                 method:'GET'
-            })
+            }),
+            providesTags:['Order']
+        }),
+        createOrder:build.mutation({
+            query:(order)=>({
+                url:`/order/create-order`,
+                method:'POST',
+                body:order
+            }),
+            invalidatesTags:['Order']
         }),
         customerDue:build.query({
             query:()=>({
@@ -100,14 +126,16 @@ export const baseApi = createApi({
             query:()=>({
                 url:'/category',
                 method:'GET'
-            })
+            }),
+            providesTags:['Category']
         }),
         createCategory:build.mutation({
             query:(categoryInfo)=>({
                 url:'/category/create',
                 method:'POST',
                 body:categoryInfo
-            })
+            }),
+            invalidatesTags:['Category']
         }),
         createProduct:build.mutation({
             query:(product)=>({
@@ -122,13 +150,6 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
-        createOrder:build.mutation({
-            query:(orderInfo)=>({
-                url:'/order/create-order',
-                method:'POST',
-                body:orderInfo
-            })
-        }),
         allOrders:build.query({
             query:(query)=>({
                 
@@ -140,4 +161,4 @@ export const baseApi = createApi({
     })
 })
 
-export const {useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

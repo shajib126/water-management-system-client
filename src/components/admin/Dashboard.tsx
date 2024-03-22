@@ -27,6 +27,7 @@ const Dashboard = () => {
             
           </div>
         </div>
+        <br />
         <div className="card  bg-orange-500 text-white">
           <div className="card-body">
             <h2 className="card-title">Total Delevered</h2>
@@ -34,6 +35,7 @@ const Dashboard = () => {
             
           </div>
         </div>
+        <br />
         <div className="card  bg-rose-400 text-white">
           <div className="card-body">
             <h2 className="card-title">Total Paid</h2>

@@ -16,6 +16,7 @@ import UserOrderHistory from "../components/user/UserOrderHistory";
 import UserDue from "../components/user/UserDue";
 import UserCredit from "../components/user/UserCredit";
 import Category from "../components/admin/Category";
+import AdditionalPrice from "../components/admin/AdditionalPrice";
 
 const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
     {
         path:'/admin/orders',
         element:<Orders/>
+    },
+    {
+        path:'/admin/additional-price',
+        element:<AdditionalPrice/>
     },
     {
         path:'/customer/products',
