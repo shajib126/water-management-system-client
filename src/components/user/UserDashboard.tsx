@@ -12,6 +12,7 @@ const UserDashboard = ({ children }: any) => {
           <UserDashboardPage />
           <div>{children}</div>
         </div>
+       
       </div>
     </ProtectUser>
   );

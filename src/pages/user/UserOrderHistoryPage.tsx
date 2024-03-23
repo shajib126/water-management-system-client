@@ -22,7 +22,7 @@ useEffect(()=>{
 },[])
   
   return (
-    <div className='w-[90%] mx-auto md:border-2 p-2 rounded-md md:shadow-md mt-4 md:h-[100vh]'>
+    <div className='w-[90%] mx-auto md:border-2 p-2 rounded-md md:shadow-md mt-4 '>
       <h1 className='text-2xl font-bold mb-4'>Order History</h1>
       {isLoading ? <span className="loading loading-bars loading-lg"></span> :<table className='table'>
         <thead>

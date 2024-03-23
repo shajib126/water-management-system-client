@@ -1,13 +1,35 @@
 
 import { Link } from 'react-router-dom'
 
+const menu = [
+  {
+    name:'Products',
+    link:'/customer/products'
+  },
+  {
+    name:'Order History',
+    link:'/customer/orders'
+  },
+  {
+    name:'Due',
+    link:'/customer/due'
+  },
+  {
+    name:'Credit',
+    link:'/customer/credit'
+  }
+]
+
 const UserDashboardPage = () => {
   return (
-    <div className='flex  justify-between md:w-[50%] w-[100%] mx-auto  p-2 '>
-      <Link className='bg-lime-600 text-gray-700 p-2 font-bold rounded-md shadow-md' to='/customer/products'>Products</Link>
-      <Link className='bg-lime-600 text-gray-700 p-2 font-bold rounded-md shadow-md' to='/customer/orders'>Order History</Link>
-      <Link className='bg-lime-600 text-gray-700 p-2 font-bold rounded-md shadow-md' to='/customer/due'>Due</Link>
-      <Link className='bg-lime-600 text-gray-700 p-2 font-bold rounded-md shadow-md' to='/customer/credit'>Credit</Link>
+    <div className=''>
+     <ul className="bg-lime-500 rounded-md w-full menu menu-horizontal bg-base-200 ">
+        {menu.map((item,i)=>(
+          <li key={i} className="border-2 rounded-md m-2 text-teal-950 font-bold text-[14px]">
+            <Link to={item.link}>{item.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
