@@ -1,7 +1,7 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 // const baseQuery = fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1'})
-
+//change 
 export const baseApi = createApi({
     baseQuery:fetchBaseQuery({baseUrl:'https://water-management-system.vercel.app/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
       const token = (getState() as RootState).auth.token
