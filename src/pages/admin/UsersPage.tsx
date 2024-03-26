@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 const UsersPage = () => {
   const [editRole,setEditRole] = useState(null)
   const [userRole,setUserRole] = useState('')
-  const { error, isLoading, data } = useCustomersQuery("");
+  const { isLoading, data } = useCustomersQuery("");
   const [editUserRole] = useEditUserRoleMutation()
  
 

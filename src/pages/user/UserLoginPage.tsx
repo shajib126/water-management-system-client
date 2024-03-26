@@ -14,7 +14,7 @@ const UserLoginPage = () => {
   const [password, setPassword] = useState("");
   const [userLogin] = useUserLoginMutation();
   const dispatch = useAppDispatch();
-  const { isLoading, error, data } = useUserProfileQuery("");
+  const { error, data } = useUserProfileQuery("");
 
   console.log(data?.data);
 
