@@ -1,6 +1,7 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 // const baseQuery = fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1'})
+//api url = https://water-management-system.vercel.app/api/v1
 //change 
 export const baseApi = createApi({
     baseQuery:fetchBaseQuery({baseUrl:'https://water-management-system.vercel.app/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
@@ -12,7 +13,7 @@ export const baseApi = createApi({
        }
        return headers
     }}),
-    tagTypes:['Category','Order','AdditionalPrice'],
+    tagTypes:['Category','Order','AdditionalPrice','AdminOrder','Product'],
     endpoints:(build)=>({
         userLogin:build.mutation({
             query:(userInfo)=>({
@@ -142,13 +143,22 @@ export const baseApi = createApi({
                 url:'/product/create',
                 method:'POST',
                 body:product
-            })
+            }),
+            invalidatesTags:['Product']
         }),
         productsAdmin:build.query({
             query:()=>({
                 url:'/product/admin',
                 method:'GET'
-            })
+            }),
+            providesTags:['Product']
+        }),
+        productsCustomer:build.query({
+            query:()=>({
+                url:'/product',
+                method:'GET'
+            }),
+            providesTags:['Product']
         }),
         allOrders:build.query({
             query:(query)=>({
@@ -156,9 +166,28 @@ export const baseApi = createApi({
                 
                 url:`/order?${query}`,
                 method:'GET'
+            }),
+            providesTags:['AdminOrder']
+        }),
+        editOrder:build.mutation({
+            query:({params,orderInfo})=>({
+                
+                
+                url:`/order/${params}`,
+                method:'PUT',
+                body:orderInfo
+                
+            }),
+            invalidatesTags:['AdminOrder']
+        }),
+        editUserRole:build.mutation({
+            query:({params,userRole})=>({
+                url:`/admin/user-role/${params}`,
+                method:'PUT',
+                body:{userRole}
             })
         })
     })
 })
 
-export const {useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

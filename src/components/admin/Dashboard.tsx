@@ -1,13 +1,18 @@
+import Loading from "../../pages/Loading";
+import { useAllOrdersQuery, useCustomersQuery } from "../../redux/api/baseApi";
 import AdminDashboard from "./AdminDashboard";
 
 const Dashboard = () => {
+  const {isLoading:orderLoading,data:orderData} = useAllOrdersQuery('')
+  const {isLoading:customerLoading,data:customerData} = useCustomersQuery('')
   return (
     <AdminDashboard>
       <div className="md:flex md:gap-8">
         <div className="card  bg-primary text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Total Order</h2>
-            <p>20</p>
+            {orderLoading ? <Loading/> :  <p>{orderData?.data.length}</p>}
+           
             
           </div>
         </div>
@@ -15,7 +20,8 @@ const Dashboard = () => {
         <div className="card  bg-success text-success-content">
           <div className="card-body">
             <h2 className="card-title">Total Customer</h2>
-            <p>20</p>
+            {customerLoading ? <Loading/> : <p>{customerData?.data.length}</p>}
+            
             
           </div>
         </div>

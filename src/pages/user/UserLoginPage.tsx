@@ -1,68 +1,62 @@
-
-import { Link, useNavigate } from 'react-router-dom'
-import { useUserLoginMutation, useUserProfileQuery } from '../../redux/api/baseApi'
-import toast, { Toaster } from 'react-hot-toast'
-import { verifyToken } from '../../utils/verifyToken'
-import { useAppDispatch } from '../../redux/hooks'
-import { setProfile, setUser } from '../../redux/features/auth/authSlice'
-import { useEffect, useState } from 'react'
-
+import { Link, useNavigate } from "react-router-dom";
+import {
+  useUserLoginMutation,
+  useUserProfileQuery,
+} from "../../redux/api/baseApi";
+import toast, { Toaster } from "react-hot-toast";
+import { verifyToken } from "../../utils/verifyToken";
+import { useAppDispatch } from "../../redux/hooks";
+import { setProfile, setUser } from "../../redux/features/auth/authSlice";
+import { useEffect, useState } from "react";
 
 const UserLoginPage = () => {
-  const [phone,setPhone] = useState('')
-  const [password,setPassword] = useState('')
-  const [userLogin] = useUserLoginMutation()
-  const dispatch = useAppDispatch()
-  const {error,data} = useUserProfileQuery('')
-  
-  
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(error){
-      dispatch(setProfile(null))
-    }
-    if(data){
-      dispatch(setProfile(data))
-    }
-    
-  },[error,data])
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [userLogin] = useUserLoginMutation();
+  const dispatch = useAppDispatch();
+  const { isLoading, error, data } = useUserProfileQuery("");
 
-  useEffect(()=>{
-    
-    
-    if(data){
-      navigate('/customer/products')
-    }
-    
-  },[])
+  console.log(data?.data);
 
-  const handleLogin = async(e:React.FormEvent)=>{
-    e.preventDefault()
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (error) {
+      dispatch(setProfile(null));
+    }
+    if (data) {
+      dispatch(setProfile(data));
+    }
+  }, [error, data]);
+
+
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     const userInfo = {
       phone,
-      password
-    }
-    if(phone == '' || password == ''){
-      console.log('both field are required!');
-      
-    }else{
-      const res = await userLogin(userInfo).unwrap()
-      if(res.error){
-        toast.error(res.error.data.message)
-      }else{
-        const user = await verifyToken(res.data.accessToken)
-        console.log(user);
+      password,
+    };
+    if (phone == "" || password == "") {
+      console.log("both field are required!");
+    } else {
+      const res = await userLogin(userInfo).unwrap();
+      if (res.error) {
+        toast.error(res.error.data.message);
+      } else {
+        const user = await verifyToken(res.data.accessToken);
         
-        dispatch(setUser({user,token: res.data.accessToken}))
-        toast.success('Logged In successfully')
-        navigate('/customer')
+
+        dispatch(setUser({ user, token: res.data.accessToken }));
+        toast.success("Logged In successfully");
+        if (user) {
+          navigate("/customer/products");
+        }
       }
-      
     }
-  }
+  };
   return (
     <div>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* <img
             className="mx-auto h-10 w-auto"
@@ -75,14 +69,22 @@ const UserLoginPage = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleLogin} className="space-y-6" action="#" method="POST">
+          <form
+            onSubmit={handleLogin}
+            className="space-y-6"
+            action="#"
+            method="POST"
+          >
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Phone
               </label>
               <div className="mt-2">
                 <input
-                onChange={(e)=>setPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                   id="phone"
                   name="phone"
                   type="phone"
@@ -95,18 +97,24 @@ const UserLoginPage = () => {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
                     Forgot password?
                   </a>
                 </div>
               </div>
               <div className="mt-2">
                 <input
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"
@@ -128,16 +136,19 @@ const UserLoginPage = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Login As admin{' '}
-            <Link to="/admin/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Login As admin{" "}
+            <Link
+              to="/admin/login"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Admin Login
             </Link>
           </p>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
-  )
-}
+  );
+};
 
-export default UserLoginPage
+export default UserLoginPage;

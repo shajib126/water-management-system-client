@@ -23,7 +23,7 @@ const ProductsPage = () => {
     </thead>
     <tbody>
       {data?.data.map((product:any,i:number)=>(
-        <tr>
+        <tr key={i}>
           <th>{i+1}</th>
           <th>{product?.productName}</th>
           <th>{product?.initialPrice}</th>

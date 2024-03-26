@@ -23,17 +23,12 @@ const AdminLoginPage = () => {
     }
     if(data){
       dispatch(setAdminProfile(data?.data))
+      navigate('/admin')
     }
     
   },[error,data])
 
-  useEffect(()=>{
-   
-   
-    if(data){
-      navigate('/admin')
-    }
-  },[])
+ 
   
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const adminLoginSubmit = async (e: any) => {
@@ -56,8 +51,10 @@ const AdminLoginPage = () => {
         console.log({ user, token: res.data.accessToken });
         dispatch(setUser({user,token: res.data.accessToken}));
         toast.success("Logged in Successfully");
-
-        navigate("/admin");
+        if(user){
+          navigate("/admin");
+        }
+        
       }
     }
   };

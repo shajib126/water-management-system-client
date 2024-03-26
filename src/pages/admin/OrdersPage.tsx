@@ -1,7 +1,9 @@
 
 import { useEffect, useState } from "react";
-import { useAllOrdersQuery } from "../../redux/api/baseApi";
+import { useAllOrdersQuery, useEditOrderMutation } from "../../redux/api/baseApi";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { MutationError } from "../../utils/MutationError";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const OrdersPage = () => {
@@ -9,14 +11,46 @@ const OrdersPage = () => {
   // const query = 'isPaid=false&placeOrder=true'
   const [showOrder,setShowOrder] = useState(null)
   const [editOption,setEditOption] = useState('')
-  const handleSaveChange = (order:any)=>{
-    console.log(order);
+  const [optionValue,setOptionValue] = useState('')
+  const [editOrder] = useEditOrderMutation()
+  const handleSaveChange = async(order:any)=>{
+    const value = optionValue == 'true' ? true : false
+    
+    
+    
+    const params = order._id
+    if(editOption == 'delevery'){
+      const orderInfo = {
+        placeOrder: value
+      }
+      const res = await editOrder({params,orderInfo})
+      const err = await MutationError(res)
+      if(err){
+        toast.error(err)
+      }
+      toast.success('Edited')
+      setShowOrder(null)
+      
+    }
+    if(editOption == 'paid'){
+      const orderInfo = {
+        isPaid:value
+      }
+      const res = await editOrder({params,orderInfo})
+      const err = await MutationError(res)
+      if(err){
+        toast.error(err)
+      }
+      toast.success('Edited')
+      setShowOrder(null)
+    }
+
     
   }
   useEffect(()=>{
 
   },[])
-  console.log(editOption);
+ 
   
   return (
     <div>
@@ -38,7 +72,7 @@ const OrdersPage = () => {
             </thead>
             <tbody>
               {data?.data.map((order:any, i:number) => (
-                <tr className="bg-base-200 text-[16px]">
+                <tr key={i} className="bg-base-200 text-[16px]">
                   <th>{i+1}</th>
                   <td>
                     <div>
@@ -89,11 +123,11 @@ const OrdersPage = () => {
               </select>
               <br />
               {
-               editOption ? editOption == 'delevery' ? <select className="mb-8 w-full p-2 rounded-md">
+               editOption ? editOption == 'delevery' ? <select value={optionValue} onChange={(e)=>setOptionValue(e.target.value)} className="mb-8 w-full p-2 rounded-md">
                   <option>Order Status</option>
                   <option value="true">Done</option>
                   <option value="false">Pending</option>
-                </select> : <select className="mb-8 w-full p-2 rounded-md">
+                </select> : <select className="mb-8 w-full p-2 rounded-md" value={optionValue} onChange={(e)=>setOptionValue(e.target.value)}>
                   <option>Payment Status</option>
                   <option value="true">Paid</option>
                   <option value="false">Due</option>
@@ -110,6 +144,7 @@ const OrdersPage = () => {
           }
         </div>
       )}
+      <Toaster/>
     </div>
   );
 };
