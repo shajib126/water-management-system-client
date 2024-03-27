@@ -37,7 +37,7 @@ useEffect(()=>{
           {data?.data?.map((order:any,i:number)=>(
             <tr key={i+1}>
               <th>{i+1}</th>
-              <td>{order?.product.productName}</td>
+              <td>{order?.product?.productName}</td>
               <td>{order?.quantity}</td>
               
               <td className={order?.placeOrder == false ? 'text-rose-600' : 'text-gray-600'}>{order?.placeOrder == false ? "PENDING" : 'ORDER PLACED'}</td>

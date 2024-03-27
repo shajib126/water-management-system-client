@@ -17,6 +17,7 @@ import UserDue from "../components/user/UserDue";
 import UserCredit from "../components/user/UserCredit";
 import Category from "../components/admin/Category";
 import AdditionalPrice from "../components/admin/AdditionalPrice";
+import Bottle from "../components/admin/Bottle";
 
 const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
     {
         path:'/admin/additional-price',
         element:<AdditionalPrice/>
+    },
+    {
+        path:'/admin/bottle',
+        element:<Bottle/>
     },
     {
         path:'/customer/products',

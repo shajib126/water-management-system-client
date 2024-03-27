@@ -13,7 +13,7 @@ export const baseApi = createApi({
        }
        return headers
     }}),
-    tagTypes:['Category','Order','AdditionalPrice','AdminOrder','Product'],
+    tagTypes:['Category','Order','AdditionalPrice','AdminOrder','Product','Bottle','AdminProfile'],
     endpoints:(build)=>({
         userLogin:build.mutation({
             query:(userInfo)=>({
@@ -32,7 +32,8 @@ export const baseApi = createApi({
             query:()=>({
                 url:'/admin/profile',
                 method:'GET'
-            })
+            }),
+            providesTags:['AdminProfile']
         }),
         requestAdminAccount:build.mutation({
             query:(adminInfo)=>({
@@ -47,7 +48,8 @@ export const baseApi = createApi({
                 url:'/admin/login',
                 method:'POST',
                 body:adminInfo
-            })
+            }),
+            invalidatesTags:['AdminProfile']
         }),
         approvedAdmin:build.query({
             query:()=>({
@@ -186,8 +188,39 @@ export const baseApi = createApi({
                 method:'PUT',
                 body:{userRole}
             })
-        })
+        }),
+        totalBottle:build.query({
+            query:()=>({
+                url:`/bottle`,
+                method:'GET'
+            }),
+            providesTags:['Bottle']
+        }),
+        createBottle:build.mutation({
+            query:(bottle)=>({
+                url:`/bottle/create`,
+                method:'POST',
+                body:{bottle}
+            }),
+            invalidatesTags:['Bottle']
+        }),
+        updateBottle:build.mutation({
+            query:(stock)=>({
+                url:`/bottle/update`,
+                method:'PUT',
+                body:{stock}
+            }),
+            invalidatesTags:['Bottle']
+        }),
+        widthdrawBottle:build.mutation({
+            query:(stock)=>({
+                url:`/bottle/widthdraw`,
+                method:'PUT',
+                body:{stock}
+            }),
+            invalidatesTags:['Bottle']
+        }),
     })
 })
 
-export const {useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

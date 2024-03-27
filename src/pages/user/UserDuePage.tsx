@@ -42,7 +42,7 @@ const UserDuePage = () => {
             {data?.data?.map((due:any, i: number) => (
               <tr className="" key={i}>
                 <th>{i + 1}</th>
-                <td>{due?.product.productName}</td>
+                <td>{due?.product?.productName}</td>
                 <td>{due?.quantity}</td>
                 <td>{due?.plcaeOrder == false ? "PENDING" : "ORDER PLACED"}</td>
                 <td>{due?.total}</td>

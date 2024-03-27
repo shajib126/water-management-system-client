@@ -29,6 +29,10 @@ const menu = [
     name:'Add Price',
     link:'/admin/additional-price'
   },
+  {
+    name:'Bottle Entry',
+    link:'/admin/bottle'
+  },
 ]
 
 const AdminDashboardPage = () => {
@@ -93,6 +97,14 @@ const AdminDashboardPage = () => {
                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
                 Additional Price
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/bottle"
+                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+              >
+                Bottle Entry
               </Link>
             </li>
           </ul>

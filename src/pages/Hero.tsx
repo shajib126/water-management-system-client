@@ -1,8 +1,24 @@
 
+import { useAdminProfileQuery, useUserProfileQuery } from '../redux/api/baseApi'
+import Loading from './Loading'
 import Navbar from './Navbar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+    const {isLoading:adminLoading,data:adminData} = useAdminProfileQuery('')
+    const {isLoading:userLoading,data:userData} = useUserProfileQuery('')
+    const navigate = useNavigate()
+    if(adminLoading || userLoading){
+      return <Loading/>
+    }
+    if(adminData?.data || userData?.data){
+      if(userData?.data){
+        navigate('/customer/products')
+      }else{
+        navigate('/admin')
+      }
+     
+    }
     
 
   return (
