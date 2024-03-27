@@ -20,8 +20,10 @@ const BottlePage = () => {
     const err = await MutationError(res)
     if(err){
         toast.error(err)
+    }else{
+      toast.success('Bottle stock entry')
     }
-    toast.success('Bottle stock entry')
+    
     
   }
   const createBottleHandle = async(e:FormEvent)=>{
@@ -31,8 +33,10 @@ const BottlePage = () => {
     const err = await MutationError(res)
     if(err){
         toast.error(err)
+    }else{
+      toast.success('Bottle stock created')
     }
-    toast.success('Bottle stock created')
+    
   }
 
   const widthdrawBottleHandler = async(e:FormEvent)=>{
@@ -42,8 +46,10 @@ const BottlePage = () => {
     const err = await MutationError(res)
     if(err){
         toast.error(err)
+    }else{
+      toast.success('Bottle widthdrawed')
     }
-    toast.success('Bottle widthdrawed')
+    
   }
   return (
     <div>
