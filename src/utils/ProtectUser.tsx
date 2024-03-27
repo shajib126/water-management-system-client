@@ -1,14 +1,15 @@
 
+import Loading from '../pages/Loading'
 import { useUserProfileQuery } from '../redux/api/baseApi'
-import { useAppSelector } from '../redux/hooks'
 import { Link } from 'react-router-dom'
 
 const ProtectUser = ({children}:{children:any}) => {
-    const profile = useAppSelector((state)=>state.auth.userProfile)
     const {isLoading,data} = useUserProfileQuery('')
     console.log(data);
-    
-    if(profile){
+    if(isLoading){
+      return <Loading/>
+    }
+    if(data?.data){
         return children
     }  
   return (
