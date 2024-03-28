@@ -2,27 +2,34 @@ import { FormEvent, useState } from "react";
 import {
   useAdditionalPriceQuery,
   useCreateAdditionalPriceMutation,
+  useUpdateAdditionalPriceMutation,
 } from "../../redux/api/baseApi";
 import { MutationError } from "../../utils/MutationError";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../Loading";
 
 const AdditionalPricePage = () => {
-  const [userType, setUserType] = useState("");
-  const [price, setPrice] = useState<number | undefined>(0);
+ 
+ const [regular,setReqular] = useState(0)
+ const [special,setSpecial] = useState(0)
+ const [superUser,setSuperUser] = useState(0)
   const [showRegular,setShowRegular] = useState(false)
   const [showSpecial,setShowSpecial] = useState(false)
   const [showSuper,setShowSuper] = useState(false)
   const [createAdditinalPrice] = useCreateAdditionalPriceMutation();
+  const [updateAdditionalPrice] = useUpdateAdditionalPriceMutation()
   const { isLoading, data } = useAdditionalPriceQuery("");
- console.log(data);
+ const [editRegular,setEditRegular] = useState(0)
+ const [editSpecial,setEditSpecial] = useState(0)
+ const [editSuper,setEditSuper] = useState(0)
  
 
   const createAdditionalPrice = async (e: FormEvent) => {
     e.preventDefault();
     const additional = {
-      userType,
-      price,
+      regular,
+      special,
+      superUser
     };
     const res = await createAdditinalPrice(additional);
     const err = await MutationError(res);
@@ -31,8 +38,24 @@ const AdditionalPricePage = () => {
     }
   };
 
-  const updateAdditionalPrice = async(data:any)=>{
-    console.log(data);
+  const updateAdditionalPriceHandle = async(data:any)=>{
+    const additionalInfo:any = {}
+    if(data.userType == 'regular'){
+      additionalInfo.regular = editRegular
+    }
+    if(data.userType == 'special'){
+      additionalInfo.special = editSpecial
+    }
+    if(data.userType == 'superUser'){
+      additionalInfo.superUser = editSuper
+    }
+    const res = await updateAdditionalPrice(additionalInfo)
+    const err = await MutationError(res)
+    if(err){
+      toast.error(err)
+    }else{
+      toast.success('additonal price updated')
+    }
     
   }
   return (
@@ -43,25 +66,22 @@ const AdditionalPricePage = () => {
       ) : data?.data.length == 0 ? (
         <form onSubmit={createAdditionalPrice}>
           <div className="mt-4 inline-block">
-            <select
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              className="select select-bordered w-full max-w-xs mb-9"
-            >
-              <option>Select User Type</option>
-              <option value="regular">Regular</option>
-              <option value="special">Special</option>
-              <option value="superUser">Super</option>
-            </select>
+            <div className="">
+            <label>Regular</label>
             <br />
-            <div className="inline-block mb-8 mr-4">
-              <label>Price</label>
-              <input
-                onChange={(e) => setPrice(parseInt(e.target.value))}
-                type="number"
-                className="input input-bordered input-secondary w-full max-w-xs"
-              />
+            <input onChange={(e)=>setReqular(parseInt(e.target.value))} required className="p-2 border-2 rounded-md w-full" type="number" />
             </div>
+            <div>
+            <label>Special</label>
+            <br />
+            <input onChange={(e)=>setSpecial(parseInt(e.target.value))} required className="p-2 border-2 rounded-md w-full" type="number" />
+            </div>
+            <div>
+            <label>Super</label>
+            <br />
+            <input onChange={(e)=>setSuperUser(parseInt(e.target.value))} required className="p-2 border-2 rounded-md w-full" type="number" />
+            </div>
+            <br />
 
             <button className="btn btn-info">Add</button>
           </div>
@@ -73,21 +93,21 @@ const AdditionalPricePage = () => {
             <div key={i} className="border-2 md:w-[50%] p-2">
               <div  className="mb-4 flex justify-between bg-success text-white p-2">
                 <h1>Regular</h1>
-                {showRegular == true ? <input type="number" /> : <h1 onClick={()=>setShowRegular(true)}>{price.regular} Taka</h1>}
+                {showRegular == true ? <input className="text-black" onChange={(e)=>setEditRegular(parseInt(e.target.value))} type="number" /> : <h1 onClick={()=>setShowRegular(true)}>{price.regular} Taka</h1>}
                 
-                <button onClick={()=>setShowRegular(false)}>Change</button>
+                <button onClick={()=>updateAdditionalPriceHandle({userType:'regular'})}>Change</button>
               </div>
               <div className="mb-4 flex justify-between bg-rose-400 text-white p-2">
                 <h1>Special</h1>
-                {showSpecial == true ? <input type="number" /> :<h1 onClick={()=>setShowSpecial(true)}>{price.special} Taka</h1>}
+                {showSpecial == true ? <input className="text-black" onChange={(e)=>setEditSpecial(parseInt(e.target.value))} type="number" /> :<h1 onClick={()=>setShowSpecial(true)}>{price.special} Taka</h1>}
                 
-                <button onClick={()=>setShowSpecial(false)}>Edit</button>
+                <button onClick={()=>updateAdditionalPriceHandle({userType:'special'})}>Change</button>
               </div>
               <div className="mb-4 flex justify-between bg-green-500 text-white p-2">
                 <h1>Super</h1>
-                {showSuper == true ? <input type="number" /> : <h1 onClick={()=>setShowSuper(true)}>{price.superUser} Taka</h1> }
+                {showSuper == true ? <input className="text-black" onChange={(e)=>setEditSuper(parseInt(e.target.value))} type="number" /> : <h1 onClick={()=>setShowSuper(true)}>{price.superUser} Taka</h1> }
                 
-                <button onClick={()=>updateAdditionalPrice({userType:'superUser'})}>Edit</button>
+                <button onClick={()=>updateAdditionalPriceHandle({userType:'superUser'})}>Change</button>
               </div>
             </div>
           ))}

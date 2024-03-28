@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
 
 const menu = [
   {
@@ -36,8 +38,15 @@ const menu = [
 ]
 
 const AdminDashboardPage = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const handleLogout = ()=>{
+    dispatch(logout())
+    navigate('/login')
+  }
   return (
     <div>
+    
       <div className="md:bg-slate-100  md:w-[100%]   md:flex md:h-screen md:flex-col md:justify-between md:border-e hidden">
         <div className="px-4 py-6">
           <ul className="mt-6 space-y-1">
@@ -108,10 +117,11 @@ const AdminDashboardPage = () => {
               </Link>
             </li>
           </ul>
+          
         </div>
       </div>
-    
-    
+      <button onClick={handleLogout} className=" md:sticky md:absolute md:bottom-[20%] md:left-2 md:w-[100%] md:btn md:btn-warning hidden">Logout</button>
+      <button onClick={handleLogout} className="md:hidden absolute top-[5%] right-2 btn btn-warning">Logout</button>
       <ul className="bg-lime-500 rounded-md w-full menu menu-horizontal bg-base-200 md:hidden">
         {menu.map((item,i)=>(
           <li key={i} className="border-2 rounded-md m-2 text-teal-950 font-bold text-[14px]">
@@ -119,6 +129,7 @@ const AdminDashboardPage = () => {
           </li>
         ))}
       </ul>
+      
     </div>
   );
 };
