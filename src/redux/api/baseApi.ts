@@ -197,10 +197,10 @@ export const baseApi = createApi({
             providesTags:['Bottle']
         }),
         createBottle:build.mutation({
-            query:(bottle)=>({
+            query:(stock)=>({
                 url:`/bottle/create`,
                 method:'POST',
-                body:{bottle}
+                body:{stock}
             }),
             invalidatesTags:['Bottle']
         }),
