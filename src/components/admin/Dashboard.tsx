@@ -1,10 +1,13 @@
 import Loading from "../../pages/Loading";
-import { useAllOrdersQuery, useCustomersQuery } from "../../redux/api/baseApi";
+import { useAllOrdersQuery, useCustomersQuery, useTotalBottleQuery, useTotalCountQuery } from "../../redux/api/baseApi";
 import AdminDashboard from "./AdminDashboard";
 
 const Dashboard = () => {
   const {isLoading:orderLoading,data:orderData} = useAllOrdersQuery('')
   const {isLoading:customerLoading,data:customerData} = useCustomersQuery('')
+  const {isLoading:totalLoading,data:totalData} = useTotalCountQuery('')
+  console.log(totalData);
+  
   return (
     <AdminDashboard>
       <div className="md:flex md:gap-8">
@@ -29,7 +32,8 @@ const Dashboard = () => {
         <div className="card  bg-red-500 text-success-content">
           <div className="card-body">
             <h2 className="card-title">Total Due</h2>
-            <p>1200 TAKA</p>
+            {totalLoading ? <Loading/>: <p>{totalData?.data.totalDues} Taka</p>}
+            
             
           </div>
         </div>
@@ -37,7 +41,7 @@ const Dashboard = () => {
         <div className="card  bg-orange-500 text-white">
           <div className="card-body">
             <h2 className="card-title">Total Delevered</h2>
-            <p>120</p>
+            {totalLoading ? <Loading/>: <p>{totalData?.data.totalDel} PCS</p>}
             
           </div>
         </div>
@@ -45,7 +49,7 @@ const Dashboard = () => {
         <div className="card  bg-rose-400 text-white">
           <div className="card-body">
             <h2 className="card-title">Total Paid</h2>
-            <p>0 TAKA</p>
+            {totalLoading ? <Loading/>: <p>{totalData?.data.totalpay} TAKA</p>}
             
           </div>
         </div>

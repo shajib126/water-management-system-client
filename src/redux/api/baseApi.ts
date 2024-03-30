@@ -4,7 +4,7 @@ import { RootState } from "../store";
 //api url = https://water-management-system.vercel.app/api/v1
 //change 
 export const baseApi = createApi({
-    baseQuery:fetchBaseQuery({baseUrl:'http://localhost:5000/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
+    baseQuery:fetchBaseQuery({baseUrl:'https://water-management-system.vercel.app/api/v1',credentials:'include',prepareHeaders:(headers,{getState})=>{
       const token = (getState() as RootState).auth.token
        
        
@@ -127,6 +127,12 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
+        customerBalance:build.query({
+            query:()=>({
+                url:'/user/balance',
+                method:'GET'
+            })
+        }),
         adminStoreId:build.query({
             query:()=>({
                 url:'/admin/approved',
@@ -228,7 +234,14 @@ export const baseApi = createApi({
             }),
             invalidatesTags:['Bottle']
         }),
+        totalCount:build.query({
+            query:()=>({
+                url:`/order/total`,
+                method:'GET'
+            })
+        }),
+        
     })
 })
 
-export const {useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useCustomerBalanceQuery,useTotalCountQuery,useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

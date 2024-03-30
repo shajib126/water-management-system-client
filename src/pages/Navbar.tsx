@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import {  useAppSelector } from "../redux/hooks"
 import logo from '../assets/logo.jpg'
+import { useAdminProfileQuery, useUserProfileQuery } from "../redux/api/baseApi"
+import Loading from "./Loading"
 
 
 
@@ -10,6 +12,10 @@ import logo from '../assets/logo.jpg'
 const Navbar = () => {
   const userProfile = useAppSelector((state)=>state.auth.userProfile)
   const profile = useAppSelector((state)=>state.auth.adminProfile)
+const {isLoading:adminLoading,data:adminData} = useAdminProfileQuery('')
+const {isLoading:userLoading,data:userData} = useUserProfileQuery('')
+
+ 
  
   return (
     <header className="sticky absolute inset-x-0 top-0 z-50">
@@ -21,7 +27,8 @@ const Navbar = () => {
               <h1>Pani hishab</h1>
             </Link>
           </div>
-          {!profile && <Link to='/login'> <button>Login</button> </Link> }
+          
+          {adminLoading ? <Loading/> : adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> }
           
         </nav>
         
