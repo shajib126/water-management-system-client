@@ -18,7 +18,6 @@ import UserCredit from "../components/user/UserCredit";
 import Category from "../components/admin/Category";
 import AdditionalPrice from "../components/admin/AdditionalPrice";
 import Bottle from "../components/admin/Bottle";
-import SellerDashboard from "../components/seller/SellerDashboard";
 import HomePage from "../pages/seller/HomePage";
 import SellerOrderPage from "../pages/seller/SellerOrderPage";
 
