@@ -28,7 +28,7 @@ const Navbar = () => {
             </Link>
           </div>
           
-          {/* { adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> } */}
+          { userProfile || profile ? '' :<Link to='/login'> <button>Login</button> </Link> }
           
         </nav>
         
