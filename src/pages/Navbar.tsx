@@ -12,8 +12,8 @@ import Loading from "./Loading"
 const Navbar = () => {
   const userProfile = useAppSelector((state)=>state.auth.userProfile)
   const profile = useAppSelector((state)=>state.auth.adminProfile)
-const {isLoading:adminLoading,data:adminData} = useAdminProfileQuery('')
-const {isLoading:userLoading,data:userData} = useUserProfileQuery('')
+const {data:adminData} = useAdminProfileQuery('')
+const {data:userData} = useUserProfileQuery('')
 
  
  
@@ -28,7 +28,7 @@ const {isLoading:userLoading,data:userData} = useUserProfileQuery('')
             </Link>
           </div>
           
-          {adminLoading || userLoading ? <Loading/> : adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> }
+          { adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> }
           
         </nav>
         
