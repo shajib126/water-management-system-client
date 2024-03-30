@@ -1,5 +1,5 @@
 import Loading from "../../pages/Loading";
-import { useAllOrdersQuery, useCustomersQuery, useTotalBottleQuery, useTotalCountQuery } from "../../redux/api/baseApi";
+import { useAllOrdersQuery, useCustomersQuery, useTotalCountQuery } from "../../redux/api/baseApi";
 import AdminDashboard from "./AdminDashboard";
 
 const Dashboard = () => {

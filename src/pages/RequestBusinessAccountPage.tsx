@@ -54,14 +54,14 @@ const [requestAdminAccount] = useRequestAdminAccountMutation()
           <form onSubmit={onSubmit} className="space-y-6" action="#" method="POST">
             <div className='md:flex md:gap-4 '>
                 <div className='mb-4'>
-                <label htmlFor="">First Name</label>
+                <label htmlFor="">Company Name</label>
                 <br />
-                <input onChange={(e)=>setFirstName(e.target.value)} className='border border-2 bg-slate-200 w-full' type="text" placeholder='first name' />
+                <input onChange={(e)=>setFirstName(e.target.value)} className='border border-2 bg-slate-200 w-full' type="text" placeholder='company name' />
                 </div>
                 <div className=''>
-                <label htmlFor="">Last Name</label>
+                <label htmlFor="">full Name</label>
                 <br />
-                <input onChange={(e)=>setLastName(e.target.value)} className='border border-2 bg-slate-200 w-full' type="text" placeholder='last name' />
+                <input onChange={(e)=>setLastName(e.target.value)} className='border border-2 bg-slate-200 w-full' type="text" placeholder='full name' />
                 </div>
             </div>
             <div>

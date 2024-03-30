@@ -28,7 +28,7 @@ const {isLoading:userLoading,data:userData} = useUserProfileQuery('')
             </Link>
           </div>
           
-          {adminLoading ? <Loading/> : adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> }
+          {adminLoading || userLoading ? <Loading/> : adminData?.success || userData?.success ? '' :<Link to='/login'> <button>Login</button> </Link> }
           
         </nav>
         
