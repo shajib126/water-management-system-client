@@ -185,11 +185,31 @@ export const baseApi = createApi({
             }),
             providesTags:['AdminOrder']
         }),
+        allOrdersSeller:build.query({
+            query:(query)=>({
+                
+                
+                url:`/order/seller?${query}`,
+                method:'GET'
+            }),
+            providesTags:['AdminOrder']
+        }),
         editOrder:build.mutation({
             query:({params,orderInfo})=>({
                 
                 
                 url:`/order/${params}`,
+                method:'PUT',
+                body:orderInfo
+                
+            }),
+            invalidatesTags:['AdminOrder']
+        }),
+        editOrderSeller:build.mutation({
+            query:({params,orderInfo})=>({
+                
+                
+                url:`/order/seller/${params}`,
                 method:'PUT',
                 body:orderInfo
                 
@@ -244,4 +264,4 @@ export const baseApi = createApi({
     })
 })
 
-export const {useCustomerBalanceQuery,useTotalCountQuery,useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useEditOrderSellerMutation,useAllOrdersSellerQuery,useCustomerBalanceQuery,useTotalCountQuery,useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

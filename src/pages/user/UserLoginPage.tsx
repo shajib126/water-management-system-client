@@ -8,7 +8,11 @@ import { verifyToken } from "../../utils/verifyToken";
 import { useAppDispatch } from "../../redux/hooks";
 import { setProfile, setUser } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
+import { JwtPayload } from "jwt-decode";
 
+interface CustomeJwtPayload extends JwtPayload {
+  role:string
+}
 const UserLoginPage = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +20,7 @@ const UserLoginPage = () => {
   const dispatch = useAppDispatch();
   const { error, data } = useUserProfileQuery("");
 
-  console.log(data?.data);
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -48,8 +52,14 @@ const UserLoginPage = () => {
 
         dispatch(setUser({ user, token: res.data.accessToken }));
         toast.success("Logged In successfully");
-        if (user) {
-          navigate("/customer/products");
+        const userWithRole = user as CustomeJwtPayload
+        if (user && userWithRole.role) {
+          if(userWithRole.role == 'seller'){
+            navigate('/seller')
+          }else{
+            navigate("/customer/products");
+          }
+          
         }
       }
     }
