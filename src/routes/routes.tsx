@@ -20,6 +20,8 @@ import AdditionalPrice from "../components/admin/AdditionalPrice";
 import Bottle from "../components/admin/Bottle";
 import HomePage from "../pages/seller/HomePage";
 import SellerOrderPage from "../pages/seller/SellerOrderPage";
+import CustomerPage from "../pages/seller/CustomerPage";
+import BottlePage from "../pages/seller/BottlePage";
 
 const router = createBrowserRouter([
     {
@@ -106,6 +108,14 @@ const router = createBrowserRouter([
     {
         path:'/seller/order',
         element:<SellerOrderPage/>
+    },
+    {
+        path:'/seller/customers',
+        element:<CustomerPage/>
+    },
+    {
+        path:'/seller/bottle',
+        element:<BottlePage/>
     }
 ])
 

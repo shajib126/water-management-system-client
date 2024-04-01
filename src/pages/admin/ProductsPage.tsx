@@ -6,6 +6,7 @@ import Loading from '../Loading';
 const ProductsPage = () => {
     const {isLoading,data} = useProductsAdminQuery('')
     
+   
     
   return (
     <div>
@@ -15,9 +16,10 @@ const ProductsPage = () => {
     <thead>
       <tr>
         <th></th>
+        <th>Image</th>
         <th>Product Name</th>
         <th>Initial Price</th>
-        <th>Category</th>
+        
         <th>Product size</th>
       </tr>
     </thead>
@@ -25,9 +27,10 @@ const ProductsPage = () => {
       {data?.data.map((product:any,i:number)=>(
         <tr key={i}>
           <th>{i+1}</th>
+          <th>{product.image ? <img className='w-[50px]' src={product?.image?.url} alt="" />  : ''}</th>
           <th>{product?.productName}</th>
           <th>{product?.initialPrice}</th>
-          <th>{product?.productCategory?.category}</th>
+          
           <th>{product?.productSize}{product?.sizeType}</th>
         </tr>
       ))}

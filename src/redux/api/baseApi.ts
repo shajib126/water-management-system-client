@@ -106,6 +106,12 @@ export const baseApi = createApi({
                 method:'GET'
             })
         }),
+        customersBySeller:build.query({
+            query:()=>({
+                url:'/user/seller',
+                method:'GET'
+            })
+        }),
         customerOrders:build.query({
             query:()=>({
                 url:`/order/customer-order`,
@@ -118,6 +124,17 @@ export const baseApi = createApi({
                 url:`/order/create-order`,
                 method:'POST',
                 body:order
+            }),
+            invalidatesTags:['Order']
+        }),
+        createOrderBySeller:build.mutation({
+            query:(orderInfo)=>({
+                url:`/order/create-order/${orderInfo.userId}`,
+                method:'POST',
+                body:{
+                    product:orderInfo.product,
+                    quantity:orderInfo.quantity
+                }
             }),
             invalidatesTags:['Order']
         }),
@@ -254,6 +271,37 @@ export const baseApi = createApi({
             }),
             invalidatesTags:['Bottle']
         }),
+        totalBottleBySeller:build.query({
+            query:()=>({
+                url:`/bottle/seller`,
+                method:'GET'
+            }),
+            providesTags:['Bottle']
+        }),
+        createBottleBySeller:build.mutation({
+            query:(stock)=>({
+                url:`/bottle/seller/create`,
+                method:'POST',
+                body:{stock}
+            }),
+            invalidatesTags:['Bottle']
+        }),
+        updateBottleBySeller:build.mutation({
+            query:(stock)=>({
+                url:`/bottle/seller/update`,
+                method:'PUT',
+                body:{stock}
+            }),
+            invalidatesTags:['Bottle']
+        }),
+        widthdrawBottleByseller:build.mutation({
+            query:(stock)=>({
+                url:`/bottle/seller/widthdraw`,
+                method:'PUT',
+                body:{stock}
+            }),
+            invalidatesTags:['Bottle']
+        }),
         totalCount:build.query({
             query:()=>({
                 url:`/order/total`,
@@ -264,4 +312,4 @@ export const baseApi = createApi({
     })
 })
 
-export const {useEditOrderSellerMutation,useAllOrdersSellerQuery,useCustomerBalanceQuery,useTotalCountQuery,useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi
+export const {useWidthdrawBottleBysellerMutation,useTotalBottleBySellerQuery,useCreateBottleBySellerMutation,useUpdateBottleBySellerMutation,useCreateOrderBySellerMutation,useCustomersBySellerQuery,useEditOrderSellerMutation,useAllOrdersSellerQuery,useCustomerBalanceQuery,useTotalCountQuery,useUpdateAdditionalPriceMutation,useWidthdrawBottleMutation,useUpdateBottleMutation,useTotalBottleQuery,useCreateBottleMutation,useEditUserRoleMutation,useEditOrderMutation,useProductsCustomerQuery,useAdditionalPriceQuery,useCreateAdditionalPriceMutation,useCreateOrderMutation,useApprovedAdminQuery,useCustomerRegistrationMutation,useAllAdminQuery,useAdminProfileQuery,useCreateCategoryMutation,useUserProfileQuery,useCustomerDueQuery,useCustomerOrdersQuery,useUserLoginMutation,useAllOrdersQuery,useProductsAdminQuery,useCreateProductMutation,useCategoriesQuery,useRequestAdminAccountMutation,useAdminLoginMutation,useCustomersQuery} = baseApi

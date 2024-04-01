@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setCategories } from "../../redux/features/category/categorySlice";
 import Loading from "../Loading";
 
+//
 const CategoryPage = () => {
   const dispatch = useAppDispatch()
   const [category,setCategory] = useState('')

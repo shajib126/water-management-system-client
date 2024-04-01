@@ -15,10 +15,7 @@ const menu = [
     name:'Products',
     link:'/admin/product'
   },
-  {
-    name:'Category',
-    link:'/admin/category'
-  },
+  
   {
     name:'Orders',
     link:'/admin/orders'
@@ -75,14 +72,7 @@ const AdminDashboardPage = () => {
                 Products
               </Link>
             </li>
-            <li>
-              <Link
-                to="/admin/category"
-                className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-              >
-                Category
-              </Link>
-            </li>
+          
             <li>
               <Link
                 to="/admin/orders"

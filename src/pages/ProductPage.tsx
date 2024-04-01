@@ -15,6 +15,7 @@ const ProductPage = () => {
     const {error,isLoading,data} = useProductsCustomerQuery('')
     const [createOrder] = useCreateOrderMutation()
     const navigate = useNavigate()
+    console.log(data);
     
     useEffect(()=>{
        if(error){
@@ -53,7 +54,7 @@ const ProductPage = () => {
                         <div className='mb-4 md:mb-0 border-2 md:w-[30%]  p-2 w-[80%] mx-auto md:mx-0 rounded-md' key={i}>
                             
                             <br />
-                            <img src={item?.productCategory?.image?.url} alt="" />
+                            <img src={item?.image ? item?.image?.url : ''} alt="" />
                             <h1 className='font-bold'> {item.productName}</h1>
                             <h1 className=''>{item.subtotal} টাকা * qty</h1>
                             
