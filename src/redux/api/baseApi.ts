@@ -113,7 +113,7 @@ export const baseApi = createApi({
             })
         }),
         customerOrders:build.query({
-            query:(args)=>({
+            query:()=>({
                     url:`/order/customer-order?thisYear=true`,
                     method:'GET'
             }),

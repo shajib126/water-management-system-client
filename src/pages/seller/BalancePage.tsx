@@ -81,7 +81,8 @@ console.log(customerTotalBalanceData);
   </form>}
 
   <h1>Total Balance</h1>
-  <p>{customerTotalBalanceData?.data} TAKA</p>
+  {custoemrTotalBalanceLoading ? <Loading/> : <p>{customerTotalBalanceData?.data} TAKA</p>}
+  
   <Toaster/>
 </div>
     </SellerDashboard>
