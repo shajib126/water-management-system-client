@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import SellerDashboard from "../../components/seller/SellerDashboard";
-import { useCreateOrderBySellerMutation, useCustomersBySellerQuery, useProductsCustomerQuery } from "../../redux/api/baseApi";
+import { useCreateOrderBySellerMutation, useCustomersBySellerQuery, useCustomerTotalBalanceBySellerQuery, useProductsCustomerQuery } from "../../redux/api/baseApi";
 import Loading from "../Loading";
 import { MutationError } from "../../utils/MutationError";
 import toast, { Toaster } from "react-hot-toast";
@@ -10,9 +10,14 @@ const CustomerPage = () => {
   const {isLoading:productLoading,data:productData} = useProductsCustomerQuery('')
   const [createOrderBySeller] = useCreateOrderBySellerMutation()
   const [userId,setUserId] = useState(null)
+  const [customerId,setCustomerId] = useState(null) 
   const [qty,setQty] = useState(0)
   const [product,setProduct] = useState('')
+  
 
+  const {data:balanceData,isLoading:balanceLoading} = useCustomerTotalBalanceBySellerQuery(customerId)
+
+  console.log(balanceData);
   
   const createOrderHandler = async(e:FormEvent)=>{
     e.preventDefault()
@@ -37,7 +42,7 @@ const CustomerPage = () => {
     <SellerDashboard>
       <h1>Customers</h1>
       <div className="overflow-x-auto">
-        <table className="table">
+        {!customerId && <table className="table">
           {/* head */}
           <thead>
             <tr>
@@ -56,7 +61,7 @@ const CustomerPage = () => {
                 {data?.data?.map((customer: any, i: number) => (
                   <tr key={i} className="bg-base-200">
                     <th>{i + 1}</th>
-                    <td>{customer?.name}</td>
+                    <td onClick={()=>setCustomerId(customer._id)}>{customer?.name}</td>
                     <td>{customer?.address}</td>
                     <td>{customer?.phone}</td>
                     <td>
@@ -68,7 +73,8 @@ const CustomerPage = () => {
             )}
             {/* row 1 */}
           
-        </table>
+        </table>}
+        
                 {userId &&  <div className="bg-green-200 p-4 md:w-[50%] mx-auto absolute top-[40%] md:left-[20%] left-[25%]">
             <h1>Create Order</h1>
             <form onSubmit={createOrderHandler}>
@@ -89,6 +95,17 @@ const CustomerPage = () => {
                 
             </form>
         </div>}
+        {customerId && <div className="bg-gray-200 w-[50%] md:w-[40%] p-4 absolute top-[40%] left-[25%]">
+          <select className="p-2 rounded-md">
+            <option value="">Last Month</option>
+            <option value="">This Month</option>
+            <option value="">This year</option>
+          </select>
+          <h1 className="text-center font-bold">Total Balance</h1>
+          {balanceLoading ? <Loading/> : <p className="text-center mt-4">{balanceData?.data > 0 ? 'Credit' : 'Due'} {balanceData?.data} TAKA</p>}
+          <button onClick={()=>setCustomerId(null)} className="btn btn-warning mt-4 w-full">Close</button>
+        </div>}
+        
        <Toaster/>
       </div>
     </SellerDashboard>

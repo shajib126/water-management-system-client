@@ -16,6 +16,10 @@ const sellerMenu = [
     {
         path:'/seller/customers',
         name:'Customers'
+    },
+    {
+        path:'/seller/add-balance',
+        name:'Balance'
     }
 ]
 const SellerMenu = () => {

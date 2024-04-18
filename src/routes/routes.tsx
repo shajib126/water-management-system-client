@@ -22,6 +22,7 @@ import HomePage from "../pages/seller/HomePage";
 import SellerOrderPage from "../pages/seller/SellerOrderPage";
 import CustomerPage from "../pages/seller/CustomerPage";
 import BottlePage from "../pages/seller/BottlePage";
+import BalancePage from "../pages/seller/BalancePage";
 
 const router = createBrowserRouter([
     {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
     {
         path:'/seller/bottle',
         element:<BottlePage/>
+    },
+    {
+        path:'/seller/add-balance',
+        element:<BalancePage/>
     }
 ])
 

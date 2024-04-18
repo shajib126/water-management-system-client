@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import Logo from '../../assets/logo.jpg'
 import {
   useUserLoginMutation,
   useUserProfileQuery,
@@ -9,6 +10,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setProfile, setUser } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import { JwtPayload } from "jwt-decode";
+import { MutationError } from "../../utils/MutationError";
 
 interface CustomeJwtPayload extends JwtPayload {
   role:string
@@ -40,39 +42,51 @@ const UserLoginPage = () => {
       phone,
       password,
     };
-    if (phone == "" || password == "") {
-      console.log("both field are required!");
-    } else {
-      const res = await userLogin(userInfo).unwrap();
-      if (res.error) {
-        toast.error(res.error.data.message);
+    try {
+      if (phone == "" || password == "") {
+        toast.error("both field are required!");
       } else {
-        const user = await verifyToken(res.data.accessToken);
+        const res = await userLogin(userInfo).unwrap();
+        const error = await MutationError(res)
+       console.log('error',error);
+       
         
-
-        dispatch(setUser({ user, token: res.data.accessToken }));
-        toast.success("Logged In successfully");
-        const userWithRole = user as CustomeJwtPayload
-        if (user && userWithRole.role) {
-          if(userWithRole.role == 'seller'){
-            navigate('/seller')
-          }else{
-            navigate("/customer/products");
-          }
+        if (error) {
+          toast.error(error);
+        } else {
+          const user = await verifyToken(res.data.accessToken);
           
+  
+          dispatch(setUser({ user, token: res.data.accessToken }));
+          toast.success("Logged In successfully");
+          const userWithRole = user as CustomeJwtPayload
+          if (user && userWithRole.role) {
+            if(userWithRole.role == 'seller'){
+              navigate('/seller')
+            }else{
+              navigate("/customer/products");
+            }
+            
+          }
         }
       }
+    } catch (error) {
+     const errorData = error as {data:{message:string}}
+      toast.error(errorData.data.message);
+      
+      
     }
+   
   };
   return (
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
+          <img
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src={Logo}
             alt="Your Company"
-          /> */}
+          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Login as User
           </h2>
