@@ -73,7 +73,7 @@ const BottlePage = () => {
                 <form onSubmit={widthdrawBottleHandler} className="text-2xl font-bold mb-4 text-center">
                     <label>Widthdraw Bottle</label>
                     <br />
-                    <input onChange={(e)=>setWidthdraw(parseInt(e.target.value))} type="number" />
+                    <input className="w-[90%]" onChange={(e)=>setWidthdraw(parseInt(e.target.value))} type="number" />
                     <br />
                     <button type="submit" className="btn btn-success mt-4 ">Widthdraw</button>
                 </form>
@@ -87,7 +87,7 @@ const BottlePage = () => {
               Create Bottle
             </label>
             <br />
-            <input onChange={(e)=>setStock(parseInt(e.target.value))} type="number" />
+            <input className="w-[90%]"  onChange={(e)=>setStock(parseInt(e.target.value))} type="number" />
             <br />
             <button type="submit" className="btn btn-success mt-4 ">Entry</button>
           </form>

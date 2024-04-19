@@ -24,7 +24,7 @@ const sellerMenu = [
 ]
 const SellerMenu = () => {
   return (
-   <ul className="bg-lime-400 p-4 flex gap-4 w-[90%] mx-auto">
+   <ul className="bg-lime-400 p-4 flex gap-4 flex-wrap w-[90%] mx-auto">
     {
         sellerMenu.map((menu)=>(
             <Link className="border-2 p-2 rounded-md font-bold" to={menu.path}>

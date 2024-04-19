@@ -16,7 +16,7 @@ const SellerNav = () => {
         <img className='w-[100px]' src={Logo} alt="" />
         <h1>Pani Hishab</h1>
         </div>
-        <button onClick={logoutHandler}>Logout</button>
+        <button className='text-red-400 font-bold' onClick={logoutHandler}>Logout</button>
     </nav>
   )
 }
