@@ -1,23 +1,20 @@
 
 import AdminDashboardPage from "../../pages/admin/AdminDashboardPage";
+import AdminNav from "../../pages/admin/AdminNav";
 import Loading from "../../pages/Loading";
-import Navbar from "../../pages/Navbar";
 import { useAdminProfileQuery } from "../../redux/api/baseApi";
 
 
 const AdminDashboard = ({children}:{children:any}) => {
  const {isLoading,data} = useAdminProfileQuery('')
- console.log(data?.data);
+
  
   
   return (
     <div>
-      <div className="flex items-center">
-      <Navbar/>
-      {isLoading ? <Loading/> :<div>
-        <h1 className="text-2xl font-bold">{data?.data.firstName} LTD</h1>
-        <h1>Store Id: {data?.data.storeId}</h1>
-      </div> }
+      <div className=" items-center">
+      <AdminNav isLoading={isLoading} data={data} />
+      
       
       </div>
         

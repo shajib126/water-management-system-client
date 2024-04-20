@@ -28,7 +28,7 @@ const Navbar = () => {
             </Link>
           </div>
           
-          { userProfile || profile ? '' :<Link to='/login'> <button>Login</button> </Link> }
+          { userProfile  ? '' :<Link to='/login'> <button>Login</button> </Link> }
           
         </nav>
         

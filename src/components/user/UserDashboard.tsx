@@ -1,13 +1,13 @@
 
-import Navbar from "../../pages/Navbar";
 import UserDashboardPage from "../../pages/user/UserDashboardPage";
+import UserNav from "../../pages/user/UserNav";
 import ProtectUser from "../../utils/ProtectUser";
 
 const UserDashboard = ({ children }: any) => {
   return (
     <ProtectUser>
       <div>
-        <Navbar />
+        <UserNav />
         <div>
           <UserDashboardPage />
           <div>{children}</div>
