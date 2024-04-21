@@ -1,7 +1,7 @@
 
 import AdminDashboardPage from "../../pages/admin/AdminDashboardPage";
 import AdminNav from "../../pages/admin/AdminNav";
-import Loading from "../../pages/Loading";
+
 import { useAdminProfileQuery } from "../../redux/api/baseApi";
 
 

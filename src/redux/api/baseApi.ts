@@ -181,7 +181,6 @@ export const baseApi = createApi({
         }),
         editProduct:build.mutation({
             query:({product,productId})=>{
-                console.log(product,productId);
                 
                 return {
                     
