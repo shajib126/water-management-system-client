@@ -12,7 +12,7 @@ const BalancePage = () => {
   const [amount,setAmount] = useState(0)
   const [customerId,setCustomerId] = useState('')
   const {isLoading:custoemrTotalBalanceLoading,data:customerTotalBalanceData} = useCustomerTotalBalanceBySellerQuery({userId:customerId})
-console.log(customerTotalBalanceData);
+
 
   const totalBalanceHandler = (id:string)=>{
     setCustomerId(id);

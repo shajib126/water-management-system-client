@@ -52,7 +52,7 @@ const CreateProductPage = () => {
         className="md:w-[50%] mx-auto p-8 h-[50vh] rounded-md "
       >
         <div>
-          <label>Category Image</label>
+          <label>Product Image</label>
           <br />
           <input
             type="file"
